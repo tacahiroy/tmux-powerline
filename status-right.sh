@@ -48,6 +48,14 @@ if [[ ${now_playing["script"]} ]]; then
 	# register_segment "now_playing"
 fi
 
+declare -A wan_ip
+wan_ip+=(["script"]="${segments_path}/wan_ip.sh")
+wan_ip+=(["foreground"]="colour255")
+wan_ip+=(["background"]="colour33")
+# wan_ip+=(["separator"]="${separator_right_bold}")
+# wan_ip+=(["separator_fg"]="white")
+register_segment "wan_ip"
+
 declare -A load
 load+=(["script"]="${segments_path}/load.sh")
 load+=(["foreground"]="colour255")

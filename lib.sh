@@ -80,7 +80,7 @@ print_status_line_left() {
             	    fi
         	fi
 	done
-	__ui_left "colour235" "colour235" "red" "$separator_right_bold" "$prev_bg"
+	# __ui_left "colour148" "colour148" "colour24" "$separator_right_thin" "$prev_bg"
 
 	# End in a clean state.
 	echo "#[default]"

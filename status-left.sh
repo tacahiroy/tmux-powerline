@@ -18,8 +18,10 @@ declare -A tmux_session_info
 tmux_session_info+=(["script"]="${segments_path}/tmux_session_info.sh")
 tmux_session_info+=(["foreground"]="colour234")
 tmux_session_info+=(["background"]="colour148")
-# tmux_session_info+=(["separator"]="${separator_right_bold}")
-#tmux_session_info+=(["separator_fg"]="default")
+# tmux_session_info+=(["separator"]="${separator_right_thin}")
+# tmux_session_info+=(["separator_fg"]="colour234")
+tmux_session_info+=(["separator"]="")
+tmux_session_info+=(["separator_fg"]="")
 register_segment "tmux_session_info"
 
 declare -A hostname
@@ -39,7 +41,7 @@ lan_ip+=(["background"]="colour24")
 declare -A wan_ip
 wan_ip+=(["script"]="${segments_path}/wan_ip.sh")
 wan_ip+=(["foreground"]="colour255")
-wan_ip+=(["background"]="colour24")
+wan_ip+=(["background"]="colour33")
 # wan_ip+=(["separator"]="${separator_right_bold}")
 # wan_ip+=(["separator_fg"]="white")
 # register_segment "wan_ip"
