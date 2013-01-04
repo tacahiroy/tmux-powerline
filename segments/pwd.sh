@@ -1,27 +1,39 @@
-#/usr/bin/env bash
 # Print the current working directory (trimmed to max length).
 # NOTE The trimming code's stolen from the web. Courtesy to who ever wrote it.
 
-pwdmaxlen=40		# Max output length.
+# Source lib to get the function get_tmux_pwd
+source "${TMUX_POWERLINE_DIR_LIB}/tmux_adapter.sh"
 
-segment_cwd=$(dirname $0)
-source "$segment_cwd/../lib.sh"
+TMUX_POWERLINE_SEG_PWD_MAX_LEN_DEFAULT="40"
 
-# Truncate from the right.
-#echo $(get_tmux_cwd | sed -e "s|${HOME}|~|" -e 's/^~$/~\//' -e 's/\(.\{40\}\).*$/\1.../')
+generate_segmentrc() {
+	read -d '' rccontents  << EORC
+# Maximum length of output.
+export TMUX_POWERLINE_SEG_PWD_MAX_LEN="${TMUX_POWERLINE_SEG_PWD_MAX_LEN_DEFAULT}"
+EORC
+	echo "$rccontents"
+}
 
-# Truncate from the left.
-tcwd=$(get_tmux_cwd)
-trunc_symbol=".."
-dir=${tcwd##*/}
-pwdmaxlen=$(( ( pwdmaxlen < ${#dir} ) ? ${#dir} : pwdmaxlen ))
-ttcwd=${tcwd/#$HOME/\~}
-pwdoffset=$(( ${#ttcwd} - pwdmaxlen ))
-if [ ${pwdoffset} -gt "0" ]; then
-	ttcwd=${ttcwd:$pwdoffset:$pwdmaxlen}
-	ttcwd=${trunc_symbol}/${ttcwd#*/}
-fi
+__process_settings() {
+	if [ -z "$TMUX_POWERLINE_SEG_PWD_MAX_LEN" ]; then
+		export TMUX_POWERLINE_SEG_PWD_MAX_LEN="${TMUX_POWERLINE_SEG_PWD_MAX_LEN_DEFAULT}"
+	fi
+}
 
-echo "$ttcwd"
-
-exit 0
+run_segment() {
+	__process_settings
+	# Truncate from the left.
+	tcwd=$(get_tmux_cwd)
+	trunc_symbol="···"
+	dir=${tcwd##*/}
+	local max_len="$TMUX_POWERLINE_SEG_PWD_MAX_LEN"
+	max_len=$(( ( max_len < ${#dir} ) ? ${#dir} : max_len ))
+	ttcwd=${tcwd/#$HOME/\~}
+	pwdoffset=$(( ${#ttcwd} - max_len ))
+	if [ ${pwdoffset} -gt "0" ]; then
+		ttcwd=${ttcwd:$pwdoffset:$max_len}
+		ttcwd=${trunc_symbol}/${ttcwd#*/}
+	fi
+	echo "$ttcwd"
+	return 0
+}
