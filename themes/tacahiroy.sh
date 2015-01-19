@@ -20,7 +20,7 @@ TMUX_POWERLINE_DEFAULT_RIGHTSIDE_SEPARATOR=${TMUX_POWERLINE_DEFAULT_RIGHTSIDE_SE
 
 if [ -z $TMUX_POWERLINE_LEFT_STATUS_SEGMENTS ]; then
 	TMUX_POWERLINE_LEFT_STATUS_SEGMENTS=(
-		"tmux_session_info 28 255" \
+		"tmux_session_info 022 255" \
 		# "hostname 33 0" \
 		# "ifstat 30 255" \
 		# "ifstat_sys 30 255" \
@@ -41,7 +41,7 @@ if [ -z $TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS ]; then
 		# "battery 166 0" \
 		# "battery 122 0" \
 		# "weather 137 255" \
-		"time 201 0 ${TMUX_POWERLINE_SEPARATOR_LEFT_BOLD}" \
+		"time 24 255 ${TMUX_POWERLINE_SEPARATOR_LEFT_BOLD}" \
 		# "pwd 89 211" \
 		# "mailcount 9 255" \
 		# "now_playing 234 37" \
