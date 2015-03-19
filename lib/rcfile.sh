@@ -39,9 +39,9 @@ generate_default_rc() {
 	export TMUX_POWERLINE_PATCHED_FONT_IN_USE="${TMUX_POWERLINE_PATCHED_FONT_IN_USE_DEFAULT}"
 	# The theme to use.
 	export TMUX_POWERLINE_THEME="${TMUX_POWERLINE_THEME_DEFAULT}"
-	# Overlay dirctory to look for themes. There you can put your own themes outside the repo. Fallback will still be the "themes" directory in the repo.
+	# Overlay directory to look for themes. There you can put your own themes outside the repo. Fallback will still be the "themes" directory in the repo.
 	export TMUX_POWERLINE_DIR_USER_THEMES=""
-	# Overlay dirctory to look for segments. There you can put your own segments outside the repo. Fallback will still be the "segments" directory in the repo.
+	# Overlay directory to look for segments. There you can put your own segments outside the repo. Fallback will still be the "segments" directory in the repo.
 	export TMUX_POWERLINE_DIR_USER_SEGMENTS=""
 # }
 EORC
@@ -50,9 +50,9 @@ EORC
 		source "$segment"
 		if declare -f generate_segmentrc >/dev/null; then
 			segmentrc=$(generate_segmentrc | sed -e 's/^/\\t/g')
+			unset -f generate_segmentrc
 			local seg_name="${segment##*/}"
 			rccontents="${rccontents}\n\n# ${seg_name} {\n${segmentrc}\n# }"
-			unset -f generate_segmentrc
 		fi
 	done
 
