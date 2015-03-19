@@ -10,13 +10,10 @@ run_segment() {
     fi
     server=$(echo ${proxy} | grep -o 'Server: .\+' | sed 's/Server:[ ]*//' | grep -o '^\S\+')
     port=$(echo ${proxy} | grep -o 'Port: .\+' | sed 's/Port:[ ]*//' | grep -o '^\d\+')
-    web_proxy="${server}:${port}"
   fi
 
-  if [ -n "$web_proxy" ]; then
-    echo "[P]:${web_proxy}"
+  if [ -n "${server}" -a -n "${port}" ]; then
+    echo "[P]:${server}:${port}"
     return 0
-  else
-    return 1
   fi
 }
