@@ -37,6 +37,7 @@ fi
 if [ -z $TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS ]; then
   TMUX_POWERLINE_RIGHT_STATUS_SEGMENTS=(
     # "wan_ip 24 255" \
+    "ruby 1 15" \
     "lan_ip 28 15" \
     "web_proxy 15 0" \
     # "battery 122 0" \
