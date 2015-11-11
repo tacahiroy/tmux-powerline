@@ -1,9 +1,14 @@
 # Description : Prints Ruby version. Currenty, this supports rbenv only
 # Author      : Takahiro Yoshihara <tacahiroy@gmail.com>
-# Date        : 3rd August 2015
+# Date        : 12th Nov 2015
 # License     : Modified BSD License
 
+source "${TMUX_POWERLINE_DIR_LIB}/tmux_adapter.sh"
+
 run_segment() {
+  tmux_cwd=$(tmux list-pane -F '#{pane_active}:#{pane_current_path}' | grep '^1:' | sed 's/^1://')
+  cd ${tmux_cwd}
+
   if rbenv -v 2>&1 > /dev/null; then
     # 2.3.0-dev (set by /home/foo/.rbenv/version)
     ruby_ver=$(rbenv version | sed 's/ (set by .*)//')
